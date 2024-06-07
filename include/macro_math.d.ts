@@ -45,6 +45,8 @@ declare interface Vector2 {
 	div(this: Vector2, other: Vector2 | number): Vector2;
 	/** macro for Vector2 // Vector2 | number */
 	idiv(this: Vector2, other: Vector2 | number): Vector2;
+	/** macro for -Vector2 */
+	unm(this: Vector2): Vector2;
 }
 
 declare interface Vector2int16 {
@@ -56,6 +58,8 @@ declare interface Vector2int16 {
 	mul(this: Vector2int16, v2: Vector2int16): Vector2int16;
 	/** macro for Vector2int16 / Vector2int16 */
 	div(this: Vector2int16, v2: Vector2int16): Vector2int16;
+	/** macro for -Vector2 */
+	unm(this: Vector2int16): Vector2int16;
 }
 
 declare interface Vector3 {
@@ -69,6 +73,8 @@ declare interface Vector3 {
 	div(this: Vector3, other: Vector3 | number): Vector3;
 	/** macro for Vector3 // Vector3 | number */
 	idiv(this: Vector3, other: Vector3 | number): Vector3;
+	/** macro for -Vector3 */
+	unm(this: Vector3): Vector3;
 }
 
 declare interface Vector3int16 {
@@ -80,4 +86,6 @@ declare interface Vector3int16 {
 	mul(this: Vector3int16, v3: Vector3int16): Vector3int16;
 	/** macro for Vector2int16 / Vector2int16 */
 	div(this: Vector3int16, v3: Vector3int16): Vector3int16;
+	/** macro for -Vector3int16 */
+	unm(this: Vector2int16): Vector2int16;
 }
