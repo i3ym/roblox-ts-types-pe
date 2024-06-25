@@ -1122,21 +1122,6 @@ interface Humanoid extends Instance {
 	CollisionType: Enum.HumanoidCollisionType;
 }
 
-interface InsertService extends Instance {
-	/**
-	 * **DO NOT USE!**
-	 *
-	 * This field exists to force TypeScript to recognize this as a nominal type
-	 * @hidden
-	 * @deprecated
-	 */
-	readonly _nominal_InsertService: unique symbol;
-	/**
-	 * Tags: Yields
-	 */
-	CreateMeshPartAsync(this: InsertService, meshId: string, collisionFidelity: CastsToEnum<Enum.CollisionFidelity>, renderFidelity: CastsToEnum<Enum.RenderFidelity>): MeshPart;
-}
-
 interface KeyframeSequenceProvider extends Instance {
 	/**
 	 * **DO NOT USE!**
@@ -3367,6 +3352,18 @@ interface GlobalSettings extends GenericSettings {
 	GetFVariable(this: GlobalSettings, name: string): string;
 }
 
+interface SoundService extends Instance {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_SoundService: unique symbol;
+	OpenAttenuationCurveEditor(this: SoundService, selectedCurveObjects: Array<Instance>): void;
+}
+
 /** A StatsItem is an internal measurement item that is created by the engine to benchmark many of the backend components of Roblox.  
  * It cannot be created using `Instance.new`, but its value can be read by plugins. They can be found stored inside of the [Stats](https://developer.roblox.com/en-us/api-reference/class/Stats) service.
  */
@@ -3678,7 +3675,6 @@ interface Studio extends Instance {
 	 * Tags: NotReplicated
 	 */
 	["Selection Color"]: Color3;
-	["Server Audio Behavior"]: Enum.ServerAudioBehavior;
 	["Set Pivot of Imported Parts"]: boolean;
 	["Show Core GUI in Explorer while Playing"]: boolean;
 	["Show Diagnostics Bar"]: boolean;

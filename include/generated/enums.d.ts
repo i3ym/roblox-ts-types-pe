@@ -415,6 +415,88 @@ declare namespace Enum {
 	}
 	export type AdTeleportMethod = AdTeleportMethod.Undefined | AdTeleportMethod.PortalForward | AdTeleportMethod.InGameMenuBackButton | AdTeleportMethod.UIBackButton;
 
+	export namespace AdUIEventType {
+		export interface AdLabelClicked extends globalThis.EnumItem {
+			Name: "AdLabelClicked";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const AdLabelClicked: AdLabelClicked;
+
+		export interface VolumeButtonClicked extends globalThis.EnumItem {
+			Name: "VolumeButtonClicked";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const VolumeButtonClicked: VolumeButtonClicked;
+
+		export interface FullscreenButtonClicked extends globalThis.EnumItem {
+			Name: "FullscreenButtonClicked";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const FullscreenButtonClicked: FullscreenButtonClicked;
+
+		export interface PlayButtonClicked extends globalThis.EnumItem {
+			Name: "PlayButtonClicked";
+			Value: 3;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const PlayButtonClicked: PlayButtonClicked;
+
+		export interface PauseButtonClicked extends globalThis.EnumItem {
+			Name: "PauseButtonClicked";
+			Value: 4;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const PauseButtonClicked: PauseButtonClicked;
+
+		export interface CloseButtonClicked extends globalThis.EnumItem {
+			Name: "CloseButtonClicked";
+			Value: 5;
+			EnumType: typeof globalThis.Enum.AdUIEventType;
+		}
+
+		export const CloseButtonClicked: CloseButtonClicked;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.AdUIEventType>;
+	}
+	export type AdUIEventType = AdUIEventType.AdLabelClicked | AdUIEventType.VolumeButtonClicked | AdUIEventType.FullscreenButtonClicked | AdUIEventType.PlayButtonClicked | AdUIEventType.PauseButtonClicked | AdUIEventType.CloseButtonClicked;
+
+	export namespace AdUIType {
+		export interface None extends globalThis.EnumItem {
+			Name: "None";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.AdUIType;
+		}
+
+		export const None: None;
+
+		export interface Image extends globalThis.EnumItem {
+			Name: "Image";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.AdUIType;
+		}
+
+		export const Image: Image;
+
+		export interface Video extends globalThis.EnumItem {
+			Name: "Video";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.AdUIType;
+		}
+
+		export const Video: Video;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.AdUIType>;
+	}
+	export type AdUIType = AdUIType.None | AdUIType.Image | AdUIType.Video;
+
 	export namespace AdUnitStatus {
 		export interface Inactive extends globalThis.EnumItem {
 			Name: "Inactive";
@@ -2441,9 +2523,17 @@ declare namespace Enum {
 
 		export const Canceled: Canceled;
 
+		export interface Offensive extends globalThis.EnumItem {
+			Name: "Offensive";
+			Value: 4;
+			EnumType: typeof globalThis.Enum.AvatarGenerationError;
+		}
+
+		export const Offensive: Offensive;
+
 		export interface Unknown extends globalThis.EnumItem {
 			Name: "Unknown";
-			Value: 4;
+			Value: 5;
 			EnumType: typeof globalThis.Enum.AvatarGenerationError;
 		}
 
@@ -2451,7 +2541,7 @@ declare namespace Enum {
 
 		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.AvatarGenerationError>;
 	}
-	export type AvatarGenerationError = AvatarGenerationError.None | AvatarGenerationError.Timeout | AvatarGenerationError.DownloadFailed | AvatarGenerationError.Canceled | AvatarGenerationError.Unknown;
+	export type AvatarGenerationError = AvatarGenerationError.None | AvatarGenerationError.Timeout | AvatarGenerationError.DownloadFailed | AvatarGenerationError.Canceled | AvatarGenerationError.Offensive | AvatarGenerationError.Unknown;
 
 	export namespace AvatarGenerationJobStatus {
 		export interface NotStarted extends globalThis.EnumItem {
@@ -6635,35 +6725,6 @@ declare namespace Enum {
 		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.EasingStyle>;
 	}
 	export type EasingStyle = EasingStyle.Linear | EasingStyle.Sine | EasingStyle.Back | EasingStyle.Quad | EasingStyle.Quart | EasingStyle.Quint | EasingStyle.Bounce | EasingStyle.Elastic | EasingStyle.Exponential | EasingStyle.Circular | EasingStyle.Cubic;
-
-	export namespace EditorLiveScripting {
-		export interface Default extends globalThis.EnumItem {
-			Name: "Default";
-			Value: 0;
-			EnumType: typeof globalThis.Enum.EditorLiveScripting;
-		}
-
-		export const Default: Default;
-
-		export interface Disabled extends globalThis.EnumItem {
-			Name: "Disabled";
-			Value: 1;
-			EnumType: typeof globalThis.Enum.EditorLiveScripting;
-		}
-
-		export const Disabled: Disabled;
-
-		export interface Enabled extends globalThis.EnumItem {
-			Name: "Enabled";
-			Value: 2;
-			EnumType: typeof globalThis.Enum.EditorLiveScripting;
-		}
-
-		export const Enabled: Enabled;
-
-		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.EditorLiveScripting>;
-	}
-	export type EditorLiveScripting = EditorLiveScripting.Default | EditorLiveScripting.Disabled | EditorLiveScripting.Enabled;
 
 	export namespace ElasticBehavior {
 		export interface WhenScrollable extends globalThis.EnumItem {
@@ -12080,9 +12141,17 @@ declare namespace Enum {
 
 		export const InsufficientMembership: InsufficientMembership;
 
+		export interface PlaceInvalid extends globalThis.EnumItem {
+			Name: "PlaceInvalid";
+			Value: 13;
+			EnumType: typeof globalThis.Enum.MarketplaceItemPurchaseStatus;
+		}
+
+		export const PlaceInvalid: PlaceInvalid;
+
 		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.MarketplaceItemPurchaseStatus>;
 	}
-	export type MarketplaceItemPurchaseStatus = MarketplaceItemPurchaseStatus.Success | MarketplaceItemPurchaseStatus.SystemError | MarketplaceItemPurchaseStatus.AlreadyOwned | MarketplaceItemPurchaseStatus.InsufficientRobux | MarketplaceItemPurchaseStatus.QuantityLimitExceeded | MarketplaceItemPurchaseStatus.QuotaExceeded | MarketplaceItemPurchaseStatus.NotForSale | MarketplaceItemPurchaseStatus.NotAvailableForPurchaser | MarketplaceItemPurchaseStatus.PriceMismatch | MarketplaceItemPurchaseStatus.SoldOut | MarketplaceItemPurchaseStatus.PurchaserIsSeller | MarketplaceItemPurchaseStatus.InsufficientMembership;
+	export type MarketplaceItemPurchaseStatus = MarketplaceItemPurchaseStatus.Success | MarketplaceItemPurchaseStatus.SystemError | MarketplaceItemPurchaseStatus.AlreadyOwned | MarketplaceItemPurchaseStatus.InsufficientRobux | MarketplaceItemPurchaseStatus.QuantityLimitExceeded | MarketplaceItemPurchaseStatus.QuotaExceeded | MarketplaceItemPurchaseStatus.NotForSale | MarketplaceItemPurchaseStatus.NotAvailableForPurchaser | MarketplaceItemPurchaseStatus.PriceMismatch | MarketplaceItemPurchaseStatus.SoldOut | MarketplaceItemPurchaseStatus.PurchaserIsSeller | MarketplaceItemPurchaseStatus.InsufficientMembership | MarketplaceItemPurchaseStatus.PlaceInvalid;
 
 	export namespace MarketplaceProductType {
 		export interface AvatarAsset extends globalThis.EnumItem {
@@ -13090,6 +13159,35 @@ declare namespace Enum {
 		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.MoveState>;
 	}
 	export type MoveState = MoveState.Stopped | MoveState.Coasting | MoveState.Pushing | MoveState.Stopping | MoveState.AirFree;
+
+	export namespace MoverConstraintRootBehaviorMode {
+		export interface Default extends globalThis.EnumItem {
+			Name: "Default";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.MoverConstraintRootBehaviorMode;
+		}
+
+		export const Default: Default;
+
+		export interface Disabled extends globalThis.EnumItem {
+			Name: "Disabled";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.MoverConstraintRootBehaviorMode;
+		}
+
+		export const Disabled: Disabled;
+
+		export interface Enabled extends globalThis.EnumItem {
+			Name: "Enabled";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.MoverConstraintRootBehaviorMode;
+		}
+
+		export const Enabled: Enabled;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.MoverConstraintRootBehaviorMode>;
+	}
+	export type MoverConstraintRootBehaviorMode = MoverConstraintRootBehaviorMode.Default | MoverConstraintRootBehaviorMode.Disabled | MoverConstraintRootBehaviorMode.Enabled;
 
 	export namespace MuteState {
 		export interface Unmuted extends globalThis.EnumItem {
@@ -16597,35 +16695,6 @@ declare namespace Enum {
 	}
 	export type SensorUpdateType = SensorUpdateType.OnRead | SensorUpdateType.Manual;
 
-	export namespace ServerAudioBehavior {
-		export interface Enabled extends globalThis.EnumItem {
-			Name: "Enabled";
-			Value: 0;
-			EnumType: typeof globalThis.Enum.ServerAudioBehavior;
-		}
-
-		export const Enabled: Enabled;
-
-		export interface Muted extends globalThis.EnumItem {
-			Name: "Muted";
-			Value: 1;
-			EnumType: typeof globalThis.Enum.ServerAudioBehavior;
-		}
-
-		export const Muted: Muted;
-
-		export interface OnlineGame extends globalThis.EnumItem {
-			Name: "OnlineGame";
-			Value: 2;
-			EnumType: typeof globalThis.Enum.ServerAudioBehavior;
-		}
-
-		export const OnlineGame: OnlineGame;
-
-		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.ServerAudioBehavior>;
-	}
-	export type ServerAudioBehavior = ServerAudioBehavior.Enabled | ServerAudioBehavior.Muted | ServerAudioBehavior.OnlineGame;
-
 	export namespace ServerLiveEditingMode {
 		export interface Uninitialized extends globalThis.EnumItem {
 			Name: "Uninitialized";
@@ -20056,6 +20125,27 @@ declare namespace Enum {
 	}
 	export type TickCountSampleMethod = TickCountSampleMethod.Fast | TickCountSampleMethod.Benchmark | TickCountSampleMethod.Precise;
 
+	export namespace TonemapperPreset {
+		export interface Default extends globalThis.EnumItem {
+			Name: "Default";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.TonemapperPreset;
+		}
+
+		export const Default: Default;
+
+		export interface Retro extends globalThis.EnumItem {
+			Name: "Retro";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.TonemapperPreset;
+		}
+
+		export const Retro: Retro;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.TonemapperPreset>;
+	}
+	export type TonemapperPreset = TonemapperPreset.Default | TonemapperPreset.Retro;
+
 	export namespace TopBottom {
 		export interface Top extends globalThis.EnumItem {
 			Name: "Top";
@@ -20523,6 +20613,130 @@ declare namespace Enum {
 		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.TweenStatus>;
 	}
 	export type TweenStatus = TweenStatus.Canceled | TweenStatus.Completed;
+
+	export namespace UIDragDetectorDragRelativity {
+		export interface Absolute extends globalThis.EnumItem {
+			Name: "Absolute";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragRelativity;
+		}
+
+		export const Absolute: Absolute;
+
+		export interface Relative extends globalThis.EnumItem {
+			Name: "Relative";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragRelativity;
+		}
+
+		export const Relative: Relative;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.UIDragDetectorDragRelativity>;
+	}
+	export type UIDragDetectorDragRelativity = UIDragDetectorDragRelativity.Absolute | UIDragDetectorDragRelativity.Relative;
+
+	export namespace UIDragDetectorDragSpace {
+		export interface Parent extends globalThis.EnumItem {
+			Name: "Parent";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragSpace;
+		}
+
+		export const Parent: Parent;
+
+		export interface LayerCollector extends globalThis.EnumItem {
+			Name: "LayerCollector";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragSpace;
+		}
+
+		export const LayerCollector: LayerCollector;
+
+		export interface Reference extends globalThis.EnumItem {
+			Name: "Reference";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragSpace;
+		}
+
+		export const Reference: Reference;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.UIDragDetectorDragSpace>;
+	}
+	export type UIDragDetectorDragSpace = UIDragDetectorDragSpace.Parent | UIDragDetectorDragSpace.LayerCollector | UIDragDetectorDragSpace.Reference;
+
+	export namespace UIDragDetectorDragStyle {
+		export interface TranslatePlane extends globalThis.EnumItem {
+			Name: "TranslatePlane";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragStyle;
+		}
+
+		export const TranslatePlane: TranslatePlane;
+
+		export interface TranslateLine extends globalThis.EnumItem {
+			Name: "TranslateLine";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragStyle;
+		}
+
+		export const TranslateLine: TranslateLine;
+
+		export interface Rotate extends globalThis.EnumItem {
+			Name: "Rotate";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragStyle;
+		}
+
+		export const Rotate: Rotate;
+
+		export interface Scriptable extends globalThis.EnumItem {
+			Name: "Scriptable";
+			Value: 3;
+			EnumType: typeof globalThis.Enum.UIDragDetectorDragStyle;
+		}
+
+		export const Scriptable: Scriptable;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.UIDragDetectorDragStyle>;
+	}
+	export type UIDragDetectorDragStyle = UIDragDetectorDragStyle.TranslatePlane | UIDragDetectorDragStyle.TranslateLine | UIDragDetectorDragStyle.Rotate | UIDragDetectorDragStyle.Scriptable;
+
+	export namespace UIDragDetectorResponseStyle {
+		export interface Offset extends globalThis.EnumItem {
+			Name: "Offset";
+			Value: 0;
+			EnumType: typeof globalThis.Enum.UIDragDetectorResponseStyle;
+		}
+
+		export const Offset: Offset;
+
+		export interface Scale extends globalThis.EnumItem {
+			Name: "Scale";
+			Value: 1;
+			EnumType: typeof globalThis.Enum.UIDragDetectorResponseStyle;
+		}
+
+		export const Scale: Scale;
+
+		export interface CustomOffset extends globalThis.EnumItem {
+			Name: "CustomOffset";
+			Value: 2;
+			EnumType: typeof globalThis.Enum.UIDragDetectorResponseStyle;
+		}
+
+		export const CustomOffset: CustomOffset;
+
+		export interface CustomScale extends globalThis.EnumItem {
+			Name: "CustomScale";
+			Value: 3;
+			EnumType: typeof globalThis.Enum.UIDragDetectorResponseStyle;
+		}
+
+		export const CustomScale: CustomScale;
+
+		export function GetEnumItems(this: globalThis.Enum): Array<globalThis.Enum.UIDragDetectorResponseStyle>;
+	}
+	export type UIDragDetectorResponseStyle = UIDragDetectorResponseStyle.Offset | UIDragDetectorResponseStyle.Scale | UIDragDetectorResponseStyle.CustomOffset | UIDragDetectorResponseStyle.CustomScale;
 
 	export namespace UIFlexAlignment {
 		export interface None extends globalThis.EnumItem {

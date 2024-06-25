@@ -234,6 +234,7 @@ interface CollectionService extends Instance {
 	HasTag(this: Instance, tag: string): boolean;
 	RemoveTag(this: CollectionService, instance: Instance, tag: string): void;
 	RemoveTag(this: Instance, tag: string): void;
+	GetAllTags(this: CollectionService): Array<string>;
 }
 
 interface CompressorSoundEffect extends SoundEffect {
@@ -348,6 +349,12 @@ interface EditableMesh extends DataModelMesh {
 }
 
 interface EmotesPages extends InventoryPages {}
+
+interface FloatCurve extends Instance {
+	GetKeyIndicesAtTime(this: FloatCurve, time: number): [before: number, after: number];
+	GetKeys(this: FloatCurve): Array<FloatCurveKey>;
+	InsertKey(this: FloatCurve, key: FloatCurveKey): [isNew: boolean, index: number];
+}
 
 interface FriendPages
 	extends Pages<{ AvatarFinal: boolean; AvatarUri: string; Id: number; Username: string; IsOnline: boolean }> {}

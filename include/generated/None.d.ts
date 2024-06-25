@@ -11,6 +11,8 @@ interface Services {
 	AnimationClipProvider: AnimationClipProvider;
 	AnimationFromVideoCreatorService: AnimationFromVideoCreatorService;
 	AnimationFromVideoCreatorStudioService: AnimationFromVideoCreatorStudioService;
+	AnnotationsService: AnnotationsService;
+	AppLifecycleObserverService: AppLifecycleObserverService;
 	AppUpdateService: AppUpdateService;
 	AssetCounterService: AssetCounterService;
 	AssetDeliveryProxy: AssetDeliveryProxy;
@@ -77,6 +79,7 @@ interface Services {
 	LanguageService: LanguageService;
 	LegacyStudioBridge: LegacyStudioBridge;
 	Lighting: Lighting;
+	LinkingService: LinkingService;
 	LiveScriptingService: LiveScriptingService;
 	LocalizationService: LocalizationService;
 	LodDataService: LodDataService;
@@ -422,6 +425,7 @@ interface CreatableInstances {
 	TrussPart: TrussPart;
 	UIAspectRatioConstraint: UIAspectRatioConstraint;
 	UICorner: UICorner;
+	UIDragDetector: UIDragDetector;
 	UIFlexItem: UIFlexItem;
 	UIGradient: UIGradient;
 	UIGridLayout: UIGridLayout;
@@ -471,6 +475,7 @@ interface Instances extends Services, CreatableInstances {
 	AvatarGenerationJob: AvatarGenerationJob;
 	AvatarGenerationSession: AvatarGenerationSession;
 	BackpackItem: BackpackItem;
+	BanHistoryPages: BanHistoryPages;
 	BaseImportData: BaseImportData;
 	BasePart: BasePart;
 	BasePlayerGui: BasePlayerGui;
@@ -1272,7 +1277,10 @@ interface AccessoryDescription extends Instance {
 	Instance: Instance | undefined;
 	IsLayered: boolean;
 	Order: number;
+	Position: Vector3;
 	Puffiness: number;
+	Rotation: Vector3;
+	Scale: Vector3;
 }
 
 interface AccountService extends Instance {
@@ -2262,6 +2270,28 @@ interface Animator extends Instance {
 	readonly AnimationPlayed: RBXScriptSignal<(animationTrack: AnimationTrack) => void>;
 }
 
+interface AnnotationsService extends Instance {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_AnnotationsService: unique symbol;
+}
+
+interface AppLifecycleObserverService extends Instance {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_AppLifecycleObserverService: unique symbol;
+}
+
 interface AppUpdateService extends Instance {
 	/**
 	 * **DO NOT USE!**
@@ -2807,6 +2837,7 @@ interface AudioChorus extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioChorus: unique symbol;
+	Bypass: boolean;
 	Depth: number;
 	Mix: number;
 	Rate: number;
@@ -2823,6 +2854,7 @@ interface AudioCompressor extends Instance {
 	 */
 	readonly _nominal_AudioCompressor: unique symbol;
 	Attack: number;
+	Bypass: boolean;
 	MakeupGain: number;
 	Ratio: number;
 	Release: number;
@@ -2843,6 +2875,7 @@ interface AudioDeviceInput extends Instance {
 	readonly Active: boolean;
 	Muted: boolean;
 	Player: Player | undefined;
+	Volume: number;
 	GetConnectedWires(this: AudioDeviceInput, pin: string): unknown;
 	GetUserIdAccessList(this: AudioDeviceInput): unknown;
 	SetUserIdAccessList(this: AudioDeviceInput, userIds: Array<any>): void;
@@ -2870,6 +2903,7 @@ interface AudioDistortion extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioDistortion: unique symbol;
+	Bypass: boolean;
 	Level: number;
 	GetConnectedWires(this: AudioDistortion, pin: string): unknown;
 }
@@ -2883,6 +2917,7 @@ interface AudioEcho extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioEcho: unique symbol;
+	Bypass: boolean;
 	DelayTime: number;
 	DryLevel: number;
 	Feedback: number;
@@ -2920,6 +2955,7 @@ interface AudioEqualizer extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioEqualizer: unique symbol;
+	Bypass: boolean;
 	HighGain: number;
 	LowGain: number;
 	MidGain: number;
@@ -2936,6 +2972,7 @@ interface AudioFader extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioFader: unique symbol;
+	Bypass: boolean;
 	Volume: number;
 	GetConnectedWires(this: AudioFader, pin: string): unknown;
 }
@@ -2949,6 +2986,7 @@ interface AudioFlanger extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioFlanger: unique symbol;
+	Bypass: boolean;
 	Depth: number;
 	Mix: number;
 	Rate: number;
@@ -2977,6 +3015,7 @@ interface AudioPitchShifter extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioPitchShifter: unique symbol;
+	Bypass: boolean;
 	Pitch: number;
 	GetConnectedWires(this: AudioPitchShifter, pin: string): unknown;
 }
@@ -3006,6 +3045,7 @@ interface AudioPlayer extends Instance {
 	 */
 	readonly TimeLength: number;
 	TimePosition: number;
+	Volume: number;
 	GetConnectedWires(this: AudioPlayer, pin: string): unknown;
 	Play(this: AudioPlayer): void;
 	Stop(this: AudioPlayer): void;
@@ -3022,6 +3062,7 @@ interface AudioReverb extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AudioReverb: unique symbol;
+	Bypass: boolean;
 	DecayRatio: number;
 	DecayTime: number;
 	Density: number;
@@ -3081,6 +3122,7 @@ interface AvatarCreationService extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_AvatarCreationService: unique symbol;
+	SendAnalyticsEvent(this: AvatarCreationService, eventName: string, params: object): void;
 	/**
 	 * Tags: Yields
 	 */
@@ -3101,6 +3143,18 @@ interface AvatarCreationService extends Instance {
 	 * Tags: Yields
 	 */
 	PromptCreateAvatarAsync(this: AvatarCreationService, player: Player, humanoidDescription: HumanoidDescription): unknown;
+	/**
+	 * Tags: Yields
+	 */
+	ValidateUGCAccessoryAsync(this: AvatarCreationService, player: Player, accessory: Accessory, accessoryType: CastsToEnum<Enum.AccessoryType>): unknown;
+	/**
+	 * Tags: Yields
+	 */
+	ValidateUGCBodyPartAsync(this: AvatarCreationService, player: Player, instance: Instance, bodyPart: CastsToEnum<Enum.BodyPart>): unknown;
+	/**
+	 * Tags: Yields
+	 */
+	ValidateUGCFullBodyAsync(this: AvatarCreationService, player: Player, humanoidDescription: HumanoidDescription): unknown;
 }
 
 /** AvatarEditorService is a service to support developer Avatar Editors. It provides methods to modify the player's platform avatar, request information about a user's inventory, and request information about the catalog.
@@ -3545,6 +3599,10 @@ interface AvatarGenerationJob extends Instance {
 	ErrorMessage: string;
 	Progress: number;
 	Status: Enum.AvatarGenerationJobStatus;
+	GetOutput(this: AvatarGenerationJob): object;
+	/**
+	 * Tags: Yields
+	 */
 	Cancel(this: AvatarGenerationJob): void;
 	/**
 	 * Tags: Yields
@@ -3933,6 +3991,7 @@ interface RootImportData extends BaseImportData {
 	InsertInWorkspace: boolean;
 	InsertWithScenePosition: boolean;
 	InvertNegativeFaces: boolean;
+	KeepZeroInfluenceBones: boolean;
 	MergeMeshes: boolean;
 	/**
 	 * Tags: NotReplicated
@@ -7524,7 +7583,7 @@ interface CollectionService extends Instance {
 	 */
 	AddTag(this: CollectionService, instance: Instance, tag: string): void;
 	AddTag(this: Instance, tag: string): void;
-	GetAllTags(this: CollectionService): unknown;
+	GetAllTags(this: CollectionService): Array<string>;
 	/**
 	 * GetInstanceAdded is given a tag (a string) and returns a signal which fires under two conditions:
 	 * 
@@ -11007,6 +11066,10 @@ interface Explosion extends Instance {
 	 */
 	ExplosionType: Enum.ExplosionType;
 	/**
+	 * Tags: Hidden, NotReplicated
+	 */
+	LocalTransparencyModifier: number;
+	/**
 	 * This property is the position of the center of the [Explosion](https://developer.roblox.com/en-us/api-reference/class/Explosion). It is defined in world-space and not influenced by the [Explosion](https://developer.roblox.com/en-us/api-reference/class/Explosion)'s parent.
 	 * 
 	 * [BasePart](https://developer.roblox.com/en-us/api-reference/class/BasePart)s will be influenced by the [Explosion](https://developer.roblox.com/en-us/api-reference/class/Explosion) if they are within [Explosion.BlastRadius](https://developer.roblox.com/en-us/api-reference/property/Explosion/BlastRadius) studs of the explosion's position.
@@ -11444,6 +11507,10 @@ interface Fire extends Instance {
 	 */
 	Heat: number;
 	/**
+	 * Tags: Hidden, NotReplicated
+	 */
+	LocalTransparencyModifier: number;
+	/**
 	 * The SecondaryColor property determines the color of the smaller particles emit by a [Fire](https://developer.roblox.com/en-us/api-reference/class/Fire) object. It is essentially the color of the inner portion of the flame. Below, you can see the SecondaryColor of the flame is set to white to differentiate with the larger, outer particles which have [Fire.Color](https://developer.roblox.com/en-us/api-reference/property/Fire/Color) set to blue. It should be noted that the inner particles use a [ParticleEmitter.LightEmission](https://developer.roblox.com/en-us/api-reference/property/ParticleEmitter/LightEmission) of 1, so darker colors will instead cause the particles to appear transparent (and therefore black will stop rendering inner particles altogether).
 	 * 
 	 * ![A Fire with SecondaryColor set to white](https://developer.roblox.com/assets/blt925890091ac70b39/Fire_Colors.png)
@@ -11488,11 +11555,11 @@ interface FloatCurve extends Instance {
 	/**
 	 * The first returned value is the index of the last key with key.time <= time (or min(1,length) if no key was found). The second returned value is the index of the first key with key.time >= time or the length of the curve if no key was found satisfying the inequality.
 	 */
-	GetKeyIndicesAtTime(this: FloatCurve, time: number): unknown;
+	GetKeyIndicesAtTime(this: FloatCurve, time: number): [before: number, after: number];
 	/**
 	 * Returns a copy of all the keys in the FloatCurve as a Lua array of FloatCurveKey.
 	 */
-	GetKeys(this: FloatCurve): unknown;
+	GetKeys(this: FloatCurve): Array<FloatCurveKey>;
 	/**
 	 * Samples the float curve at a given time passed as argument.
 	 */
@@ -11500,7 +11567,7 @@ interface FloatCurve extends Instance {
 	/**
 	 * Adds the key passed as argument to this curve. If a key exists at the same time it will be replaced. First return value is true if a key was added, false if a previous key was replaced. Second return value is the index at which the marker was added.
 	 */
-	InsertKey(this: FloatCurve, key: FloatCurveKey): unknown;
+	InsertKey(this: FloatCurve, key: FloatCurveKey): [isNew: boolean, index: number];
 	/**
 	 * Removes a given number of Keys starting from a given index. Returns the number of keys that were removed.
 	 */
@@ -13286,6 +13353,11 @@ interface TextButton extends GuiButton {
 	 * Setting the property to -1 disables the limit and shows the entirety of the [TextButton.Text](https://developer.roblox.com/en-us/api-reference/property/TextButton/Text).
 	 */
 	MaxVisibleGraphemes: number;
+	OpenTypeFeatures: string;
+	/**
+	 * Tags: NotReplicated
+	 */
+	readonly OpenTypeFeaturesError: string;
 	/**
 	 * This property determines whether the [TextButton](https://developer.roblox.com/en-us/api-reference/class/TextButton) renders the [TextButton.Text](https://developer.roblox.com/en-us/api-reference/property/TextButton/Text) string using rich text formatting. Rich text uses simple markup tags to style sections of the string in bold, italics, specific colors, and more.
 	 * 
@@ -13610,6 +13682,11 @@ interface TextLabel extends GuiLabel {
 	 * Setting the property to -1 disables the limit and shows the entirety of the [TextLabel.Text](https://developer.roblox.com/en-us/api-reference/property/TextLabel/Text).
 	 */
 	MaxVisibleGraphemes: number;
+	OpenTypeFeatures: string;
+	/**
+	 * Tags: NotReplicated
+	 */
+	readonly OpenTypeFeaturesError: string;
 	/**
 	 * This property determines whether the [TextLabel](https://developer.roblox.com/en-us/api-reference/class/TextLabel) renders the [TextLabel.Text](https://developer.roblox.com/en-us/api-reference/property/TextLabel/Text) string using rich text formatting. Rich text uses simple markup tags to style sections of the string in bold, italics, specific colors, and more.
 	 * 
@@ -14003,6 +14080,11 @@ interface TextBox extends GuiObject {
 	 * When set to true, text inside a TextBox is able to move onto multiple lines. This also enables players to use the enter key to move onto a new line.
 	 */
 	MultiLine: boolean;
+	OpenTypeFeatures: string;
+	/**
+	 * Tags: NotReplicated
+	 */
+	readonly OpenTypeFeaturesError: string;
 	/**
 	 * Sets the text color that gets used when no text has been entered into the TextBox yet.
 	 */
@@ -19572,6 +19654,10 @@ interface InsertService extends Instance {
 	Insert(this: InsertService, instance: Instance): void;
 	/**
 	 * Tags: Yields
+	 */
+	CreateMeshPartAsync(this: InsertService, meshId: string, collisionFidelity: CastsToEnum<Enum.CollisionFidelity>, renderFidelity: CastsToEnum<Enum.RenderFidelity>): MeshPart;
+	/**
+	 * Tags: Yields
 	 * @deprecated Use `GetBaseSets` instead
 	 */
 	GetBaseCategories(this: InsertService): unknown;
@@ -20983,6 +21069,17 @@ interface Lighting extends Instance {
 	 * In cases where this behavior is not desired, the [Instance.Changed](https://developer.roblox.com/en-us/api-reference/event/Instance/Changed) event or [Instance:GetPropertyChangedSignal](https://developer.roblox.com/en-us/api-reference/function/Instance/GetPropertyChangedSignal) function can be used.
 	 */
 	readonly LightingChanged: RBXScriptSignal<(skyChanged: boolean) => void>;
+}
+
+interface LinkingService extends Instance {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_LinkingService: unique symbol;
 }
 
 interface LiveScriptingService extends Instance {
@@ -22534,6 +22631,7 @@ interface MarketplaceService extends Instance {
 	 * @deprecated
 	 */
 	readonly _nominal_MarketplaceService: unique symbol;
+	PromptBulkPurchase(this: MarketplaceService, player: Player, lineItems: Array<any>, options: object): void;
 	/**
 	 * Used to prompt a user to purchase a bundle with the given bundleId
 	 */
@@ -22859,6 +22957,7 @@ interface MarketplaceService extends Instance {
 	 * Tags: Yields
 	 */
 	UserOwnsGamePassAsync(this: MarketplaceService, userId: number, gamePassId: number): boolean;
+	readonly PromptBulkPurchaseFinished: RBXScriptSignal<(player: Player, status: Enum.MarketplaceBulkPurchasePromptStatus, results: object) => void>;
 	readonly PromptBundlePurchaseFinished: RBXScriptSignal<(player: Player, bundleId: number, wasPurchased: boolean) => void>;
 	/**
 	 * This event fires when a purchase dialogue of a game pass is closed. This fires right as the dialogue closes when the player presses “Cancel” at the prompt, or “OK” at the success/error message.
@@ -27057,6 +27156,17 @@ interface AudioPages extends Pages {
 	readonly _nominal_AudioPages: unique symbol;
 }
 
+interface BanHistoryPages extends Pages {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_BanHistoryPages: unique symbol;
+}
+
 interface CatalogPages extends Pages<SearchCatalogResult> {
 	/**
 	 * **DO NOT USE!**
@@ -29106,6 +29216,10 @@ interface Players extends Instance {
 	 * Tags: Yields
 	 */
 	CreateHumanoidModelFromUserId(this: Players, userId: number): Model;
+	/**
+	 * Tags: Yields
+	 */
+	GetBanHistoryAsync(this: Players, userId: number): BanHistoryPages;
 	/**
 	 * This function returns a [Model](https://developer.roblox.com/en-us/api-reference/class/Model) containing the assets which the player is wearing, excluding gear.
 	 * 
@@ -31451,6 +31565,10 @@ interface Smoke extends Instance {
 	 */
 	Enabled: boolean;
 	/**
+	 * Tags: Hidden, NotReplicated
+	 */
+	LocalTransparencyModifier: number;
+	/**
 	 * Opacity determines the opaqueness of the smoke particles. It must be in the range \[0, 1\]. This property works **inversely** in comparison to a part's [BasePart.Transparency](https://developer.roblox.com/en-us/api-reference/property/BasePart/Transparency) or ParticleEmitter's [ParticleEmitter.Transparency](https://developer.roblox.com/en-us/api-reference/property/ParticleEmitter/Transparency): a value of 0 is completely invisible, 1 is completely visible. Below, the left [Smoke](https://developer.roblox.com/en-us/api-reference/class/Smoke) effect has an Opacity of 0.25 (or, 25%), the center has the default 0.5 (50%), and the right has 1.0 (or 100%).
 	 * 
 	 * ![Smoke with varying opacity levels](https://developer.roblox.com/assets/blt40432eff6f9ab4f2/Smoke_Opacity.png)
@@ -32665,6 +32783,10 @@ interface Sparkles extends Instance {
 	 * stopSparkling(part.Sparkles)
 	 */
 	Enabled: boolean;
+	/**
+	 * Tags: Hidden, NotReplicated
+	 */
+	LocalTransparencyModifier: number;
 	/**
 	 * **Note** This property functions identically to [Sparkles.Color](https://developer.roblox.com/en-us/api-reference/property/Sparkles/Color)
 	 * 
@@ -35732,6 +35854,38 @@ interface UICorner extends UIComponent {
 	 * It is suggested to always use either scale or offset to define CornerRadius instead of mixing them up.
 	 */
 	CornerRadius: UDim;
+}
+
+interface UIDragDetector extends UIComponent {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	readonly _nominal_UIDragDetector: unique symbol;
+	BoundingUI: GuiBase2d | undefined;
+	DragAxis: Vector2;
+	DragRelativity: Enum.UIDragDetectorDragRelativity;
+	DragRotation: number;
+	DragSpace: Enum.UIDragDetectorDragSpace;
+	DragStyle: Enum.UIDragDetectorDragStyle;
+	DragUDim2: UDim2;
+	Enabled: boolean;
+	MaxDragAngle: number;
+	MaxDragTranslation: UDim2;
+	MinDragAngle: number;
+	MinDragTranslation: UDim2;
+	ReferenceUIInstance: GuiObject | undefined;
+	ResponseStyle: Enum.UIDragDetectorResponseStyle;
+	AddConstraintFunction(this: UIDragDetector, priority: number, callback: Callback): RBXScriptConnection;
+	GetReferencePosition(this: UIDragDetector): UDim2;
+	GetReferenceRotation(this: UIDragDetector): number;
+	SetDragStyleFunction(this: UIDragDetector, callback: Callback): void;
+	readonly DragContinue: RBXScriptSignal<(inputPosition: Vector2) => void>;
+	readonly DragEnd: RBXScriptSignal<(inputPosition: Vector2) => void>;
+	readonly DragStart: RBXScriptSignal<(inputPosition: Vector2) => void>;
 }
 
 interface UIFlexItem extends UIComponent {
